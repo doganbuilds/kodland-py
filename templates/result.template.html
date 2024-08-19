@@ -1,0 +1,52 @@
+{% extends "layout.template.html" %}
+
+{% block content %}
+
+<div class="flex flex-col items-center justify-center w-full min-h-screen">
+  <h1 class="text-3xl font-bold mb-4">{{name}} {{surname}} Test Sonuçları</h1>
+  <div class="max-w-60 flex w-full">
+    <table class="table table-auto text-left w-full prose">
+      <tr>
+        <th class="py-2">Toplam Soru Sayısı</th>
+        <td class="py-2 text-right">{{results.total}}</td>
+      </tr>
+      <tr>
+        <th class="py-2">Doğru Cevap Sayısı</th>
+        <td class="py-2 text-right">{{results.correct}}</td>
+      </tr>
+      <tr>
+        <th class="py-2">Yanlış Cevap Sayısı</th>
+        <td class="py-2 text-right">{{results.wrong}}</td>
+      </tr>
+      <tr>
+        <th class="py-2">Puan</th>
+        <td class="py-2 text-right">{{results.percentage}}</td>
+      </tr>
+    </table>
+  </div>
+
+
+  <div class="flex flex-col mt-10 w-full p-10 items-center justify-center">
+    <h2 class="text-3xl font-bold mb-4">Cevap Anahtarı</h2>
+    <table class="table table-auto text-left w-full prose">
+      <thead>
+        <tr>
+          <th class="py-2">Soru</th>
+          <th class="py-2">Doğru Cevap</th>
+          <th class="py-2">Verilen Cevap</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for question in results.results %}
+        <tr class="mb-4">
+          <td class="text-lg font-medium">{{ question.question }}</td>
+          <td class="text-md font-normal">{{ question.answer }}</td>
+          <td>{{question.user_answer}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

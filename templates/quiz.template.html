@@ -1,0 +1,40 @@
+{% extends "layout.template.html" %}
+
+{% block content %}
+<div class="flex flex-col p-10 w-full min-h-screen">
+  <div id="best_score" class="me-0 ms-auto"></div>
+  <script>
+    var best_score = document.cookie.split(';').find(cookie => cookie.includes('score')).split('=')[1];
+    document.getElementById('best_score').innerHTML = `En iyi skorunuz: ${best_score ? best_score : 0}`
+  </script>
+  <form action="{{ url_for('answer_route') }}" method="post">
+    {% for question in questions %}
+    <div class="mb-8 flex flex-col items-start justify-start">
+      <h2 class="mb-4 text-2xl font-medium">{{ question.question }}</h2>
+      <ul>
+        <li>
+          <input type="radio" name="question{{ question.id }}" value="option1" id="option1">
+          <label for="question{{ question.id }}">{{ question.option1 }}</label>
+        </li>
+
+        <li>
+          <input type="radio" name="question{{ question.id }}" value="option2" id="option2">
+          <label for="question{{ question.id }}">{{ question.option2 }}</label>
+        </li>
+
+        <li>
+          <input type="radio" name="question{{ question.id }}" value="option3" id="option3">
+          <label for="question{{ question.id }}">{{ question.option3 }}</label>
+        </li>
+
+        <li>
+          <input type="radio" name="question{{ question.id }}" value="option4" id="option4">
+          <label for="question{{ question.id }}">{{ question.option4 }}</label>
+        </li>
+      </ul>
+    </div>
+    {% endfor %}
+    <input type="submit" value="Cevapla" class="bg-indigo-500 hover:bg-indigo-700 px-3 py-2 text-white font-bold mt-4">
+  </form>
+</div>
+{% endblock %}

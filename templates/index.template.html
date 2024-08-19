@@ -1,0 +1,37 @@
+{% extends "layout.template.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 flex flex-col" role="alert">
+  <strong class="font-bold">Hata!</strong>
+  <ul class="list-disc ps-8">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="flex flex-col items-center justify-center w-full min-h-[90vh]">
+  <h1 class="font-bold text-3xl text-dark mb-4">Merhaba, Python Yapay Zeka Testine Hoşgeldin!</h1>
+  <p class="text-dark text-lg mb-4">Bu testte Python programlama dili ve yapay zeka konularında bilginizi ölçeceğiz. Toplamda 10 soru var ve her soru 10 puan değerinde.</p>
+  <p class="text-dark text-lg mb-4">Başlamadan önce lütfen adınızı ve soyadınızı girin.</p>
+  <form action="{{ url_for('quiz_route') }}" method="post" class="flex flex-col items-center">
+    <input type="text" name="name" placeholder="Adınız" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-64 mb-4" />
+
+    <input type="text" name="surname" placeholder="Soyadınız" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-64 mb-4" />
+
+    <button type="submit" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-4 block">
+      Teste Başla
+    </button>
+  </form>
+
+  <div class="flex items-center justify-center mt-8">
+    <a href="{{ url_for('leaderboard_route') }}" class="text-blue-500 hover:text-blue-700 mt-4">Liderlik Tablosu</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layout.template.html" %}
+
+{% block title %}Liderlik Tablosu{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center w-full min-h-[90vh]">
+  <h1 class="font-bold text-3xl text-dark mb-4">Liderlik Tablosu</h1>
+  <table class="table-auto w-1/2">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">Sıra</th>
+        <th class="px-4 py-2">Ad Soyad</th>
+        <th class="px-4 py-2">Puan</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for score in leaderboard %}
+      <tr>
+        <td class="border px-4 py-2">{{ loop.index }}</td>
+        <td class="border px-4 py-2">{{ score.name }}</td>
+        <td class="border px-4 py-2">{{ score.score }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endblock %}
